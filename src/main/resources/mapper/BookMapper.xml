@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.panlei.demo.dao.BookMapper" >
+
+    <insert id="addBook" parameterType="com.panlei.demo.bean.Book">
+                insert into book(
+            book_name, author, status
+            )
+        values
+        (#{book_name},#{author},1)
+    </insert>
+    <delete id="deleteBook" parameterType="java.lang.Integer">
+        delete from book where id = #{id}
+    </delete>
+    <select id="queryAllBooks" parameterType="com.panlei.demo.bean.request.QueryAllBooksReq" resultType="com.panlei.demo.bean.Book">
+        select * from book
+        <where>
+            <if test="book_name != null">
+                book_name = #{book_name}
+            </if>
+        </where>
+    </select>
+    <select id="selectBookById" parameterType="java.lang.Integer" resultType="com.panlei.demo.bean.Book">
+        select * from book where id = #{id}
+    </select>
+    <update id="rant" parameterType="com.panlei.demo.bean.Book">
+        update book
+        set
+        status = 2,
+        rant_date1 = #{rant_date1},
+        rant_date2 = #{rant_date2},
+        ranter = #{ranter}
+        where
+        id = #{id}
+    </update>
+
+    <update id="edit"  parameterType="com.panlei.demo.bean.Book">
+        update book
+        set
+        <if test="null != status">
+            status = @{status},
+        </if>
+        <if test="null != rant_date1">
+            rant_date1 = #{rant_date1},
+        </if>
+        <if test="null != rant_date2">
+            rant_date2 = #{rant_date2},
+        </if>
+        <if test="null != ranter">
+            ranter = #{user_name}
+        </if>
+        where
+        id = #{book_id}
+    </update>
+    <update id="returnBook" parameterType="java.lang.Integer">
+        update book
+        set
+        status = 1,
+         rant_date1 = null,
+         rant_date2 = null,
+         ranter = null
+        where
+        id = #{id}
+    </update>
+</mapper>

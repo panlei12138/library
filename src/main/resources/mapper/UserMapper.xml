@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.panlei.demo.dao.UserMapper" >
+    <select id="selectCountByUserName" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*)
+        from user
+        where
+        user_name = #{user_name}
+    </select>
+    <insert id="register" parameterType="com.panlei.demo.bean.User">
+        insert into user(
+            user_name, name, pwd, e_mail, role
+            )
+        values
+        (#{user_name},#{name},#{pwd},#{e_mail},#{role})
+    </insert>
+    <select id="selectUserByUserName" parameterType="com.panlei.demo.bean.User" resultType="com.panlei.demo.bean.User">
+        select * from user where user_name = #{user_name} and role = #{role}
+    </select>
+</mapper>
