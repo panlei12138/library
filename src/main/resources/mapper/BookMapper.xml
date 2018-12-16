@@ -36,21 +36,28 @@
 
     <update id="edit"  parameterType="com.panlei.demo.bean.Book">
         update book
-        set
-        <if test="null != status">
-            status = @{status},
-        </if>
-        <if test="null != rant_date1">
-            rant_date1 = #{rant_date1},
-        </if>
-        <if test="null != rant_date2">
-            rant_date2 = #{rant_date2},
-        </if>
-        <if test="null != ranter">
-            ranter = #{user_name}
-        </if>
+        <set>
+            <if test="null != book_name">
+                book_name = #{book_name},
+            </if>
+            <if test="null != author">
+                author = #{author},
+            </if>
+            <if test="null != status">
+                status = #{status},
+            </if>
+            <if test="null != rant_date1">
+                rant_date1 = #{rant_date1},
+            </if>
+            <if test="null != rant_date2">
+                rant_date2 = #{rant_date2},
+            </if>
+            <if test="null != ranter">
+                ranter = #{ranter}
+            </if>
+        </set>
         where
-        id = #{book_id}
+        id = #{id}
     </update>
     <update id="returnBook" parameterType="java.lang.Integer">
         update book

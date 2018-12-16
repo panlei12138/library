@@ -2,6 +2,7 @@ package com.panlei.demo.bean.response;
 
 import com.github.pagehelper.PageInfo;
 import com.panlei.demo.bean.Book;
+import com.panlei.demo.bean.User;
 
 public class BaseRes {
     private Integer code = 1;
@@ -27,6 +28,10 @@ public class BaseRes {
 
     public BaseRes(Book book) {
         this.data = book;
+    }
+
+    public BaseRes(User user) {
+        this.data = user;
     }
 
     public Integer getCode() {

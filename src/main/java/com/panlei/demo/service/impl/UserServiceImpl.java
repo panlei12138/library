@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
         else if(!req.getPwd().equals(user.getPwd())) {
             return new BaseRes(0, "用户/密码错误");
         } else {
-            return new BaseRes();
+            return new BaseRes(user);
         }
     }
 }
